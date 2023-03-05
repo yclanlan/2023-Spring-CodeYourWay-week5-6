@@ -8,40 +8,51 @@ let numLines = 1000;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  strokeWeight(0.5);
+  // background(255);
+  strokeWeight(0.1);
   stroke(255);
 }
 
 function draw() {
-  background(0);
+  colorMode(RGB)
+ 
   translate(width / 2, height / 2);
-
+  rotate(frameCount/500);
+  
   let amplitude = width /4;
-  let variable1 = 5+mouseX/100*5;
-  let variable2 = 5+mouseY/100*5;
-  console.log(variable1);
+  let variable=0;
+  let increasing=10;
+  variable+= increasing;
+  
+  if ( variable < 0 || variable > 2000)   increasing *= -1;
+  // console.log(variable);
+  let variable1 = 5+variable/200*5;
+  let variable2 = 5+variable/10*5;
+  scale(-2+sin(frameCount/300)*2);
+  background(map(variable,100,2000,0,255),10);
+  // console.log(variable1);
 
   for (let i = 0; i < numLines; i++) {
 
     let x1 = sin((t + i) / variable1) * amplitude 
-          //  + cos((t + 1) / 5) * 50;
+           + cos((t + 1) / 5) * 50;
 
     let y1 = cos((-t + i) / variable1) * amplitude 
-          //  + sin(((t + 1) / 5) * 50);
+           + sin(((t + 1) / 5) * 50);
 
     let x2 = sin((t + i) / variable2) * (amplitude * 2) 
-          //  + cos(t + 1) * 50;
+           + cos(t + 1) * 50;
 
     let y2 = cos((-t + i) / variable2) * (amplitude * 2)
-          //  + sin(t + 1) * 50;
-
-    stroke(map(mouseX+mouseY,0,width+height,20,100));
+           + sin(t + 1) * 50;
+    colorMode(HSB)
+    stroke(200,random(0,255),random(80,100));
     line(x1, y1, x2, y2);
     
   }
 
-  t += 0.2;
-  rotate(frameCount/10);
+  t += 0.1;
+  
 }
 
 function windowResized() {
