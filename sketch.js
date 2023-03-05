@@ -5,6 +5,8 @@ https://www.youtube.com/watch?v=LaarVR1AOvs&t=181s
 
 let t = 0;
 let numLines = 1000;
+let variable = 10;
+let increasing = 0.001;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -18,11 +20,13 @@ function draw() {
   rotate(frameCount/500);
   
   let amplitude = width /4;
-  let variable=0;
-  let increasing=10;
-  variable+= increasing;
   
-  if (variable < 2000 || variable > 100)  increasing *= -1;
+  variable = variable + increasing;
+  
+  if (variable < 0 || variable > 800)  increasing*= -1;
+ 
+  
+   console.log(variable);
   
   let variable1 = 5+variable/200*5;
   let variable2 = 5+variable/10*5;
@@ -38,10 +42,10 @@ function draw() {
     let y1 = cos((-t + i) / variable1) * amplitude 
           //  + sin(((t + 1) / 5) * 50);
 
-    let x2 = sin((t + i) / variable2) * (amplitude * 2) 
+    let x2 = sin((t + i) / variable2) * (amplitude * 3) 
           //  + cos(t + 1) * 50;
 
-    let y2 = cos((-t + i) / variable2) * (amplitude * 2)
+    let y2 = cos((-t + i) / variable2) * (amplitude * 3)
           //  + sin(t + 1) * 50;
 
     stroke(random(200,255));
